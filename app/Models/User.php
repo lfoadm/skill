@@ -58,4 +58,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //Direciona a imagem do perfil do usuário
+    public function adminlte_image()
+    {
+        return 'https://picsum.photos/300/300'; 
+    }
+
+    //Subscreve o cargo do usuário logo abaixo da foto
+    public function adminlte_desc()
+    {
+        return 'Super Admin';
+    }
+
+    //Libera atalho de ajustes do perfil de usuário
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
 }
