@@ -16,4 +16,8 @@ return [
     'Important'                     => 'Importante',
     'Warning'                       => 'Aviso',
     'Information'                   => 'Informação',
+    
+    'initials_settings'             => 'Configurações Iniciais',
+    'group_users'                   => 'Grupos usuários',
+    'permissions'                   => 'Permissões',
 ];

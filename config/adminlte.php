@@ -267,6 +267,20 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        ['header' => 'initials_settings'],
+        [
+            'text' => 'group_users',
+            'route'  => 'admin.roles.index',
+            'icon' => 'fas fa-user-lock',
+            //'can'  => 'admin.roles.index',
+        ],
+        [
+            'text' => 'permissions',
+            'route'  => 'admin.permissions.index',
+            'icon' => 'fas fa-lock',
+            //'can'  => 'admin.roles.index',
+        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -415,7 +429,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',

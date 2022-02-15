@@ -15,13 +15,7 @@ teste
 @stop
 
 @section('js')
-    <script>
-        Swal.fire(
-        'Bem vindo!',
-        'Este site exibe cookies!',
-        'success'
-)
-    </script>
+    
 @stop
 
 
