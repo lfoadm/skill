@@ -33,6 +33,8 @@
                             @include('admin.spatie.includes.permissions.users')
                             @include('admin.spatie.includes.permissions.tenants')
                             @include('admin.spatie.includes.permissions.companies')
+                            @include('admin.spatie.includes.permissions.trucks')
+                            
                         </div>
                         <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">Cancelar</a>
                         <button class="btn btn-success" type="submit">Salvar</button>
