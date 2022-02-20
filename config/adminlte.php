@@ -233,18 +233,18 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
+        /* [
             'type'         => 'navbar-search',
             'text'         => 'search',
             'topnav_right' => true,
-        ],
+        ], */
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
-        [
+        /* [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
@@ -252,7 +252,7 @@ return [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
-        ],
+        ], */
         [
             'text'  => 'Dashboard',
             'route' => 'dashboard',
@@ -260,26 +260,40 @@ return [
             //'label' => 'new',
             //'label_color' => 'warning'
         ],
-        [
+        /* [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
-        ['header' => 'initials_settings'],
+        ], */
+        
         [
-            'text' => 'group_users',
-            'route'  => 'admin.roles.index',
-            'icon' => 'fas fa-user-lock',
-            //'can'  => 'admin.roles.index',
+            'text' => 'initials_settings',
+            'icon'    => 'fas fa-fw fa-trash',
+            'submenu' => [
+                [
+                    'text' => 'users',
+                    'route'  => 'admin.users.index',
+                    'icon' => 'fas fa-fw fa-users',
+                    //'can'  => 'admin.roles.index',
+                ],
+                [
+                    'text' => 'group_access',
+                    'route'  => 'admin.roles.index',
+                    'icon' => 'fas fa-fw fa-user-lock',
+                    //'can'  => 'admin.roles.index',
+                ],
+                [
+                    'text' => 'permissions',
+                    'route'  => 'admin.permissions.index',
+                    'icon' => 'fas fa-lock',
+                    //'can'  => 'admin.roles.index',
+                ],
+            ],
         ],
-        [
-            'text' => 'permissions',
-            'route'  => 'admin.permissions.index',
-            'icon' => 'fas fa-lock',
-            //'can'  => 'admin.roles.index',
-        ],
+        
+        
 
         ['header' => 'account_settings'],
         [

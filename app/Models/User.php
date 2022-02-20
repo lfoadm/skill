@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Tenant;
+use App\Models\Traits\Tenantable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,9 +15,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use Tenantable;
     use HasRoles;
     use HasApiTokens;
-    use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -29,6 +31,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'status',
+        'cnh',
+        'validityCnh',
+        'mopp',
+        'moppNumber',
+        'tenant_id',
     ];
 
     /**
@@ -77,5 +86,10 @@ class User extends Authenticatable
     public function adminlte_profile_url()
     {
         return 'profile/username';
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

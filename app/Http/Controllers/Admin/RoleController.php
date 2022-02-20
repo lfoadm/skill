@@ -126,6 +126,7 @@ class RoleController extends Controller
     public function role_has_permission(Request $request, $id)
     {
         $role = Role::find($id);
+        
         $permission_index = Permission::where('name', '=', 'admin.roles.index')->get();
         $permission_create = Permission::where('name', '=', 'admin.roles.create')->get();
         $permission_edit = Permission::where('name', '=', 'admin.roles.edit')->get();

@@ -53,10 +53,10 @@
             @enderror
         </div>
 
-        {{-- Name field --}}
-        {{-- <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+        {{-- Phone --}}
+        <div class="input-group mb-3">
+            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
+                value="{{ old('phone') }}" placeholder="{{ __('Telefone') }}" autofocus>
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -64,12 +64,12 @@
                 </div>
             </div>
 
-            @error('name')
+            @error('phone')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-        </div> --}}
+        </div>
 
         {{-- Password field --}}
         <div class="input-group mb-3">

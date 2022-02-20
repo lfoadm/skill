@@ -18,6 +18,7 @@ return [
     'Information'                   => 'Informação',
     
     'initials_settings'             => 'Configurações Iniciais',
-    'group_users'                   => 'Grupos usuários',
+    'group_access'                  => 'Grupos de acessos',
     'permissions'                   => 'Permissões',
+    'users'                         => 'Usuários',
 ];
