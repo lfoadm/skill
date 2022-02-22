@@ -32,7 +32,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="tenant_id">Inquilino</label>
-                                <span class="badge bg-primary"><a href="{{-- route('admin.tenants.create') --}}"><i
+                                <span class="badge bg-primary"><a href="{{ route('admin.tenants.create') }}"><i
                                             class="fas fa-plus"></i> Adicionar</a></span>
                                 <div>
                                     <select class="form-control" name="tenant_id" id="tenant_id">

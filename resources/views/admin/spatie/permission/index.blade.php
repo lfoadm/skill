@@ -46,8 +46,9 @@
             </div>
             @endif
         </div>
-
+        {{ $permissions->links() }}
     </div>
+    
 </div>
 
 @stop

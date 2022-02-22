@@ -7,7 +7,18 @@
 @stop
 
 @section('content')
-teste
+
+@if($user->hasRole('superadmin'))
+@include('includes.dashboards.superadmin')
+
+@elseif($user->hasRole('motorista'))
+@include('includes.dashboards.motorista')
+
+@else
+@include('includes.dashboards.newuser')
+
+@endif
+
 @stop
 
 @section('css')

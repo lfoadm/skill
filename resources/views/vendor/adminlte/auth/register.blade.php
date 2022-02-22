@@ -55,8 +55,7 @@
 
         {{-- Phone --}}
         <div class="input-group mb-3">
-            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                value="{{ old('phone') }}" placeholder="{{ __('Telefone') }}" autofocus>
+            <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Telefone">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -123,4 +122,22 @@
             {{ __('adminlte::adminlte.i_already_have_a_membership') }}
         </a>
     </p>
+@stop
+
+@section('js')
+<script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#phone").mask("(00) 0000-00000")
+        $("#phone").blur(function(event) {
+            if($(this).val().length == 15) {
+                $("#phone").mask("(00) 00000-0000")
+            }
+            else {
+                $("#phone").mask("(00) 0000-00000")
+            }
+        })
+    })
+</script>
+
 @stop

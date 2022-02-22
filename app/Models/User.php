@@ -8,10 +8,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
@@ -73,19 +75,42 @@ class User extends Authenticatable
     //Direciona a imagem do perfil do usuário
     public function adminlte_image()
     {
-        return 'https://picsum.photos/300/300'; 
+        //return 'https://picsum.photos/300/300'; 
+        $path = Auth::user()->profile_photo_path;
+        //dd($path);
+        if ($path)
+        {
+            return url('storage/'.$path);
+        }
+        else
+        {
+            return url('storage/profile-photos/user.png');
+        }
     }
 
     //Subscreve o cargo do usuário logo abaixo da foto
     public function adminlte_desc()
     {
-        return 'Super Admin';
+        $user = Auth::user();
+        if( $user->HasRole('motorista'))
+        {return 'Motorista';}
+        elseif( $user->HasRole('secretaria'))
+        {return 'Secretária (o)';}
+        elseif( $user->HasRole('gerente'))
+        {return 'Gerente';}
+        elseif( $user->HasRole('admin'))
+        {return 'Administrador do sistema';}
+        elseif( $user->HasRole('superadmin'))
+        {return 'Super Admin';}
+        else
+        {return 'Não atribuído';}
     }
 
     //Libera atalho de ajustes do perfil de usuário
     public function adminlte_profile_url()
     {
-        return 'profile/username';
+        //return 'profile/username';
+        return 'user/profile';
     }
 
     public function tenant()

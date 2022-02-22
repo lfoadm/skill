@@ -10,7 +10,7 @@ class PermissionsController extends Controller
 {
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(9);
         return view('admin.spatie.permission.index', ['permissions' => $permissions]);
     }
 
@@ -39,13 +39,19 @@ class PermissionsController extends Controller
     
     public function edit($id)
     {
-        //
+        $permission = Permission::find($id);
+        //dd($id);
+        return view('admin.spatie.permission.edit', ['permission' => $permission]);
     }
 
     
     public function update(Request $request, $id)
     {
-        //
+        $permission = Permission::find($id);
+        $permission->name = $request->name;
+        $permission->save();
+
+        return redirect()->route('admin.permissions.index');
     }
 
     

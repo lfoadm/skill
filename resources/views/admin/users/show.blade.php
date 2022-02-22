@@ -13,10 +13,10 @@
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    @if($user->image)
-                        <img src="{{ url('storage/users') }}/{{ $user->image }}" class="profile-user-img img-fluid img-circle" style="width: 100%">
+                    @if($user->profile_photo_path)
+                        <img src="{{ url('storage/') }}/{{ $user->profile_photo_path }}" class="profile-user-img img-fluid img-circle" style="width: 100%">
                     @else
-                        <img src="{{ asset('/img/default.jpg') }}" class="profile-user-img img-fluid img-circle" style="width: 100%">
+                        <img src="{{ url('storage/profile-photos/user.png') }}" class="profile-user-img img-fluid img-circle" style="width: 100%">
                     @endif
                 </div>
                 <h3 class="profile-username text-center">{{ $user->name }}</h3>

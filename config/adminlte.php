@@ -271,34 +271,40 @@ return [
         [
             'text' => 'initials_settings',
             'icon'    => 'fas fa-fw fa-trash',
+            'can'  => 'admin.roles.index',
             'submenu' => [
                 [
                     'text' => 'users',
                     'route'  => 'admin.users.index',
                     'icon' => 'fas fa-fw fa-users',
-                    //'can'  => 'admin.roles.index',
+                    'can'  => 'admin.users.index',
                 ],
                 [
                     'text' => 'group_access',
                     'route'  => 'admin.roles.index',
                     'icon' => 'fas fa-fw fa-user-lock',
-                    //'can'  => 'admin.roles.index',
+                    'can'  => 'admin.roles.index',
                 ],
                 [
                     'text' => 'permissions',
                     'route'  => 'admin.permissions.index',
                     'icon' => 'fas fa-lock',
-                    //'can'  => 'admin.roles.index',
+                    'can'  => 'admin.permissions.index',
                 ],
             ],
         ],
         
-        
+        ['header' => 'register'],
+        [
+            'text' => 'Tenants',
+            'route'  => 'admin.tenants.index',
+            'icon' => 'fas fa-fw fa-suitcase',
+        ],
 
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.profile.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -467,6 +473,16 @@ return [
                 ],
             ],
         ],
+        /* 'Jquery' => [
+            'active' => true,
+            'files'  => [
+                [
+                    'type' => 'js',
+                    'asset'=> true,
+                    'location' => 'js/jquery.mask.min.js'
+                ]
+            ],
+        ], */
     ],
 
     /*
