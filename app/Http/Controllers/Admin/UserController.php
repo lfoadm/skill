@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all()->except(1);
+        $users = User::where('type', '!=', 'admin')->get();
         //dd($users->HasRole('motorista'));
 
         return view('admin.users.index', ['users' => $users]);

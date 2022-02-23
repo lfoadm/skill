@@ -109,7 +109,7 @@
                         </div> --}}
                         <a href="{{ route('admin.users.index') }}" class="btn btn-warning"><i
                                 class="fas fa-times-circle"></i> Cancelar</a>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-save nav-icon"></i>Atualizar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save nav-icon"></i> Atualizar</button>
                     </form>
                 </div>
             </div>

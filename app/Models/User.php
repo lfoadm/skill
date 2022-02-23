@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Driver;
 use App\Models\Admin\Tenant;
 use App\Models\Traits\Tenantable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -35,11 +36,13 @@ class User extends Authenticatable
         'password',
         'phone',
         'status',
-        'cnh',
-        'validityCnh',
-        'mopp',
-        'moppNumber',
+        'address',
+        'number',
+        'district',
+        'city',
+        'state',
         'tenant_id',
+        'type',
     ];
 
     /**
@@ -116,5 +119,10 @@ class User extends Authenticatable
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function driver()
+    {
+        return $this->hasMany(Driver::class);
     }
 }

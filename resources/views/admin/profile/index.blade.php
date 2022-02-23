@@ -67,12 +67,16 @@
                     <div class="card-header"><i class="fas fa-home"></i><h3 class="card-title"></h3> Endereço</div>
 
                     <div class="card-body">
-                        <strong><i class="fas fa-map mr-1"></i> Logradouro</strong>
-                        <p class="text-muted">Rua Tal, 123</p>
-                        <hr>
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Cidade</strong>
-                        <p class="text-muted">Iturama/MG</p>
-                        <hr>
+                        @if($user->address)
+                            <strong><i class="fas fa-map mr-1"></i> Logradouro</strong>
+                            <p class="text-muted">{{ $user->address }}, {{ $user->number }} - {{ $user->district }}</p>
+                            <hr>
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Cidade</strong>
+                            <p class="text-muted">{{ $user->city }}/{{ $user->state }}</p>
+                            <hr>
+                        @else
+                            <p>sem logradouro cadastrado</p>
+                        @endif
                         {{-- <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
                         <p class="text-muted">
                             <span class="tag tag-danger">UI Design</span>
@@ -95,15 +99,75 @@
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#dados" data-toggle="tab">Dados</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#dados" data-toggle="tab">Dados Cadastrais</a></li>
                             {{-- <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> --}}
-                            <li class="nav-item"><a class="nav-link" href="#update" data-toggle="tab">Atualizar dados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#update" data-toggle="tab">Documentos</a></li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="active tab-pane" id="dados">
-                                {{-- inserir dados --}}
+                                <form  class="form-horizontal" action="{{ route('admin.profile.update', ['profile' => $user->id]) }}" method="POST">
+                                    @csrf @method('PATCH')
+                                    <div class="form-group row">
+                                        <label for="inputEmail" class="col-sm-2 col-form-label">E-mail</label>
+                                        <div class="col-sm-10">
+                                            <input disabled type="email" class="form-control" id="inputEmail" value="{{ $user->email }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-sm-2 col-form-label">Nome</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome completo" value="{{ $user->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="phone" class="col-sm-2 col-form-label">Telefone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" value="{{ $user->phone }}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="address" class="col-sm-2 col-form-label">Endereço</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="address" name="address" placeholder="Endereço" value="{{ $user->address }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="number" class="col-sm-2 col-form-label">Número</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="number" name="number" placeholder="Nº" value="{{ $user->number }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="district" class="col-sm-2 col-form-label">Bairro</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="district" name="district" placeholder="Bairro" value="{{ $user->district }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="city" class="col-sm-2 col-form-label">Cidade</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" value="{{ $user->city }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="state" class="col-sm-2 col-form-label">Estado</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="state" name="state" placeholder="Estado" value="{{ $user->state }}">
+                                        </div>
+                                    </div>
+
+                                    
+                                    <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-success">Atualizar</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
 
                             {{-- <div class="tab-pane" id="timeline">
@@ -195,61 +259,46 @@
                             </div> --}}
 
                             <div class="tab-pane" id="update">
-                                <form  class="form-horizontal" action="{{ route('admin.profile.update', ['profile' => $user->id]) }}" method="POST">
-                                    @csrf @method('PATCH')
+                                @if($driver === null)
+                                <h2 style="color: crimson">Usuário sem perfil de motorista</h2>
+                                @else
+                                <form  class="form-horizontal" action="{{ route('admin.drivers.update', ['driver' => $driver->id]) }}" method="POST">
+                                    @csrf @method('PUT')
                                     <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">E-mail</label>
+                                        <label for="cnh" class="col-sm-2 col-form-label">C.N.H.</label>
                                         <div class="col-sm-10">
-                                            <input disabled type="email" class="form-control" id="inputEmail" value="{{ $user->email }}">
+                                            <input type="text" class="form-control" id="cnh" name="cnh" value="{{ $driver->cnh }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="name" class="col-sm-2 col-form-label">Nome</label>
+                                        <label for="validityCnh" class="col-sm-2 col-form-label">Validade CNH</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome completo" value="{{ $user->name }}">
+                                            <input type="date" class="form-control" id="validityCnh" name="validityCnh" value="{{ $driver->validityCnh }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="phone" class="col-sm-2 col-form-label">Nome</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone" value="{{ $user->phone }}" data-inputmask="'mask': ['(99) 99999-9999']" data-mask="(__) _____-____" inputmode="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="cnh" class="col-sm-2 col-form-label">CNH</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="cnh" name="cnh" placeholder="Cnh" value="{{ $user->cnh }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="validityCnh" class="col-sm-2 col-form-label">Validade</label>
-                                        <div class="col-sm-10">
-                                            <input type="date" class="form-control" id="validityCnh" name="validityCnh" value="{{ $user->validityCnh }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="inputSkills" class="col-sm-2 col-form-label">Tem MOPP?</label>
+                                        <label for="mopp" class="col-sm-2 col-form-label">Tem MOPP?</label>
                                             <div class="col-sm-10">
                                                 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                                    <input type="checkbox" @if($user->mopp) checked @endif class="custom-control-input" id="mopp" name="mopp">
+                                                    <input type="checkbox" @if($driver->mopp) checked @endif class="custom-control-input" id="mopp" name="mopp">
                                                     <label class="custom-control-label" for="mopp"></label>
                                                 </div>
-                                                {{-- <label><input type="checkbox"  value="{{ $user->mopp }}" name="mopp"> Sim</label> --}}
                                             </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="moppNumber" class="col-sm-2 col-form-label">Incrição MOPP</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="moppNumber" name="moppNumber" placeholder="somente números" value="{{ $user->moppNumber }}">
+                                            <input type="text" class="form-control" id="moppNumber" name="moppNumber" placeholder="somente números" value="{{ $driver->moppNumber }}">
                                         </div>
                                     </div>
-                                    <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                                    {{-- <input type="hidden" name="id" id="id" value="{{$user->id}}"> --}}
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
                                             <button type="submit" class="btn btn-success">Atualizar</button>
                                         </div>
                                     </div>
                                 </form>
+                                @endif
                             </div>
 
                         </div>
@@ -271,5 +320,18 @@
 @stop
 
 @section('js')
-    
+<script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#phone").mask("(00) 0000-00000")
+        $("#phone").blur(function(event) {
+            if($(this).val().length == 15) {
+                $("#phone").mask("(00) 00000-0000")
+            }
+            else {
+                $("#phone").mask("(00) 0000-00000")
+            }
+        })
+    })
+</script>
 @stop

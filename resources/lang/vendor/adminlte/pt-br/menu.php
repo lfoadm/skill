@@ -21,5 +21,6 @@ return [
     'group_access'                  => 'Grupos de acessos',
     'permissions'                   => 'Permissões',
     'users'                         => 'Usuários',
-    'register'                      => 'Cadastro',
+    'registers'                     => 'Cadastros',
+    'drivers'                       => 'Motoristas',
 ];

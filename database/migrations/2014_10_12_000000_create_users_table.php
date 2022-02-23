@@ -21,10 +21,12 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone', 15);
             $table->enum('status',['actived','inactived','pre_registred']);
-            $table->string('cnh')->nullable();
-            $table->string('validityCnh')->nullable();
-            $table->boolean('mopp')->default(false);
-            $table->string('moppNumber')->nullable();
+            $table->enum('type',['admin','manager','driver']);
+            $table->string('address')->nullable();
+            $table->string('number')->nullable();
+            $table->string('district')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

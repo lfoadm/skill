@@ -18,4 +18,9 @@ class Tenant extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function drivers()
+    {
+        return $this->hasMany(Driver::class);
+    }
 }

@@ -70,6 +70,27 @@
             @enderror
         </div>
 
+        {{-- Type --}}
+        <label for="registeras">Registrar como:</label>
+        <div class="input-group mb-3">
+            
+            <select name="registeras" id="registeras" class="form-control" required autofocus autocomplete="registeras" style="color: #898a8b">
+                <option value="driver">Motorista</option>
+                <option value="manager">Gestor</option>
+            </select>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-graduation-cap {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('registeras')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
@@ -91,8 +112,8 @@
         {{-- Confirm password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password_confirmation"
-                   class="form-control @error('password_confirmation') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.retype_password') }}">
+                class="form-control @error('password_confirmation') is-invalid @enderror"
+                placeholder="{{ __('adminlte::adminlte.retype_password') }}">
 
             <div class="input-group-append">
                 <div class="input-group-text">

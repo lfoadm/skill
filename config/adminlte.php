@@ -271,34 +271,46 @@ return [
         [
             'text' => 'initials_settings',
             'icon'    => 'fas fa-fw fa-trash',
-            'can'  => 'admin.roles.index',
+            //'can'  => 'admin.roles.index',
             'submenu' => [
                 [
                     'text' => 'users',
                     'route'  => 'admin.users.index',
                     'icon' => 'fas fa-fw fa-users',
-                    'can'  => 'admin.users.index',
+                    //'can'  => 'admin.users.index',
                 ],
                 [
                     'text' => 'group_access',
                     'route'  => 'admin.roles.index',
                     'icon' => 'fas fa-fw fa-user-lock',
-                    'can'  => 'admin.roles.index',
+                    //'can'  => 'admin.roles.index',
                 ],
                 [
                     'text' => 'permissions',
                     'route'  => 'admin.permissions.index',
                     'icon' => 'fas fa-lock',
-                    'can'  => 'admin.permissions.index',
+                    //'can'  => 'admin.permissions.index',
                 ],
             ],
         ],
         
-        ['header' => 'register'],
+        [
+            'header' => 'registers',
+            'can'  => 'admin.tenants.index',
+
+        ],
+        
         [
             'text' => 'Tenants',
             'route'  => 'admin.tenants.index',
             'icon' => 'fas fa-fw fa-suitcase',
+            'can'  => 'admin.tenants.index',
+        ],
+        [
+            'text' => 'drivers',
+            'route'  => 'admin.drivers.index',
+            'icon' => 'fas fa-fw fa-clipboard-list',
+            //'can'  => 'admin.drivers.index',
         ],
 
         ['header' => 'account_settings'],
@@ -307,7 +319,7 @@ return [
             'route'  => 'admin.profile.index',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
+        /* [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
@@ -365,7 +377,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ], */
     ],
 
     /*

@@ -17,7 +17,13 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.profile.index', ['user' => $user]);
+        $driver = $user->driver->first();
+        //dd($driver);
+        
+        return view('admin.profile.index', [
+            'user' => $user,
+            'driver' => $driver
+        ]);
     }
 
     /**
@@ -63,39 +69,23 @@ class ProfileController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         $user = User::find($id);
         $user->name = $request->name;
-        $user->cnh = $request->cnh;
-        $user->validityCnh = $request->validityCnh;
-        if($request->mopp === null)
-        {
-            $user->mopp = 0;
-        }
-        else
-        {
-            $user->mopp = 1;
-        }
-        $user->moppNumber = $request->moppNumber;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->number = $request->number;
+        $user->district = $request->district;
+        $user->city = $request->city;
+        $user->state = $request->state;
         $user->save();
 
-        return redirect()->route('admin.profile.index')->with('message', 'Atualizado com sucesso!');
+        return redirect()->route('admin.profile.index')->with('message', 'Dados atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //
