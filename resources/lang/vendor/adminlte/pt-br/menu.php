@@ -22,5 +22,7 @@ return [
     'permissions'                   => 'Permissões',
     'users'                         => 'Usuários',
     'registers'                     => 'Cadastros',
-    'drivers'                       => 'Motoristas',
+    'Drivers'                       => 'Motoristas',
+    'Companies'                     => 'Empresas',
+    'Trucks'                        => 'Veículos',
 ];

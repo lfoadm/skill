@@ -134,7 +134,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-light-info elevation-4',
+    'classes_sidebar' => 'sidebar-dark-info elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -296,7 +296,7 @@ return [
         
         [
             'header' => 'registers',
-            'can'  => 'admin.tenants.index',
+            //'can'  => 'admin.tenants.index',
 
         ],
         
@@ -304,13 +304,25 @@ return [
             'text' => 'Tenants',
             'route'  => 'admin.tenants.index',
             'icon' => 'fas fa-fw fa-suitcase',
-            'can'  => 'admin.tenants.index',
+            //'can'  => 'admin.tenants.index',
         ],
         [
-            'text' => 'drivers',
+            'text' => 'Companies',
+            'route'  => 'admin.companies.index',
+            'icon' => 'fas fa-fw fa-crown',
+            //'can'  => 'admin.companies.index',
+        ],
+        [
+            'text' => 'Drivers',
             'route'  => 'admin.drivers.index',
             'icon' => 'fas fa-fw fa-clipboard-list',
             //'can'  => 'admin.drivers.index',
+        ],
+        [
+            'text' => 'Trucks',
+            'route'  => 'admin.trucks.index',
+            'icon' => 'fas fa-fw fa-truck',
+            //'can'  => 'admin.trucks.index',
         ],
 
         ['header' => 'account_settings'],

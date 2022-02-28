@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TruckController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\TenantController;
@@ -27,9 +29,20 @@ Route::get('users/tenant/disable', [UserController::class, 'disable_tenant'])->n
 //Tenants
 Route::resource('tenants', TenantController::class)->names('admin.tenants');
 Route::get('tenants/disable/{tenant}', [TenantController::class, 'disable'])->name('admin.tenants.disable');
-Route::get('/admin/tenants/activate/{tenant}', [TenantController::class, 'activate'])->name('admin.tenants.activate');
+Route::get('tenants/activate/{tenant}', [TenantController::class, 'activate'])->name('admin.tenants.activate');
+
+//Companies
+Route::resource('companies', CompanyController::class)->names('admin.companies');
+Route::get('companies/disable/{company}', [CompanyController::class, 'disable'])->name('admin.companies.disable');
+Route::get('companies/enable/{company}', [CompanyController::class, 'enable'])->name('admin.companies.enable');
 
 //Drivers
 Route::resource('drivers', DriverController::class)->names('admin.drivers');
+Route::get('drivers/setTenant/{driver}', [DriverController::class, 'setTenant'])->name('admin.drivers.setTenant');
+#Route::get('drivers/disable/{driver}', [DriverController::class, 'disable'])->name('admin.drivers.disable');
+#Route::get('drivers/enable/{driver}', [DriverController::class, 'enable'])->name('admin.drivers.enable');
 
-
+//Trucks
+Route::resource('trucks', TruckController::class)->names('admin.trucks');
+Route::get('trucks/disable/{truck}', [TruckController::class, 'disable'])->name('admin.trucks.disable');
+Route::get('trucks/enable/{truck}', [TruckController::class, 'enable'])->name('admin.trucks.enable');

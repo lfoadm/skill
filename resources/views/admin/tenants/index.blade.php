@@ -22,12 +22,13 @@
             {{ session('updated') }}
         </div>
     @endif
+    <a href="{{ route('admin.tenants.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
     <div class="card">
         <div class="card-body">
             <h4 class="card-title"></h4>
             <div class="table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables-wrapper container-fluid dt_bootstrap4">
-                    <a style="margin-bottom: 20px" href="{{ route('admin.tenants.create') }}" type="button" class="btn bg-gradient-success btn-lg"><i class="fas fa-plus"></i> Tenant</a>
+                    
                     <div class="row">
                         <div class="col-sm-12">
                             @if($tenants->count() > 0)

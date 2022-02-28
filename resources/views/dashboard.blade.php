@@ -14,6 +14,9 @@
 @elseif($user->hasRole('motorista'))
 @include('includes.dashboards.motorista')
 
+@elseif($user->hasRole('secretaria'))
+@include('includes.dashboards.secretaria')
+
 @else
 @include('includes.dashboards.newuser')
 
