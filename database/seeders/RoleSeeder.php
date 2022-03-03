@@ -68,4 +68,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.profile.destroy']);
     }
 
+
+
 }

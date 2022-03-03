@@ -30,6 +30,7 @@ class CreateNewUser implements CreatesNewUsers
 
         $registeras = $input['registeras'] === 'driver' ? 'driver':'manager';
 
+        
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],

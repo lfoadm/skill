@@ -14,9 +14,9 @@
         @can('admin.companies.create')
             <a href="{{ route('admin.companies.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
         @endcan
-        {{-- @if($companies->count() > 0) --}}
         <div class="card">
             <div class="card-body table-responsive p-0">
+                @if($companies->count() > 0)
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
@@ -62,9 +62,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{-- @else
-                    <h2 style="color: crimson">Nenhuma empresa cadastrada</h2>
-                @endif --}}
+                @else
+                <p class="text-center">Sem cadastro para listar.</p>
+                @endif
+
             </div>
         </div>
     </div>

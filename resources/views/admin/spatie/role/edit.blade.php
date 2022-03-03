@@ -28,6 +28,7 @@
                     <form action="{{ route('admin.roles_has_permissions', ['id' => $role->id]) }}" method="POST">
                         @csrf
                         <div class="row">
+
                             @include('admin.spatie.includes.permissions.usergroup')
                             @include('admin.spatie.includes.permissions.permissions')
                             @include('admin.spatie.includes.permissions.users')
@@ -35,6 +36,7 @@
                             @include('admin.spatie.includes.permissions.companies')
                             @include('admin.spatie.includes.permissions.trucks')
                             @include('admin.spatie.includes.permissions.drivers')
+                            
                         </div>
                         <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">Cancelar</a>
                         <button class="btn btn-success" type="submit">Salvar</button>

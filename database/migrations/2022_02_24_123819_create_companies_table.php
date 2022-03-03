@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained(); //recebedor do dinheiro de remessa
             $table->boolean('status')->default(true);
             $table->string('cnpj', 18);
             $table->string('corporateName', 100)->nullable();

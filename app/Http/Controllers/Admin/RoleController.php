@@ -119,7 +119,7 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
+        //dd($request);
     }
     
     public function show($id)
@@ -140,14 +140,14 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         
-        $permission_index = Permission::where('name', '=', 'admin.roles.index')->get();
-        $permission_create = Permission::where('name', '=', 'admin.roles.create')->get();
-        $permission_edit = Permission::where('name', '=', 'admin.roles.edit')->get();
-        $permission_destroy = Permission::where('name', '=', 'admin.roles.destroy')->get();
-        if($request->indexRoles === 'on') {$role->givePermissionTo($permission_index);} else{$role->revokePermissionTo($permission_index);}
-        if($request->createRoles === 'on') {$role->givePermissionTo($permission_create);} else{$role->revokePermissionTo($permission_create);}
-        if($request->editRoles === 'on') {$role->givePermissionTo($permission_edit);} else{$role->revokePermissionTo($permission_edit);}
-        if($request->destroyRoles === 'on') {$role->givePermissionTo($permission_destroy);} else{$role->revokePermissionTo($permission_destroy);}
+        $role_index = Permission::where('name', '=', 'admin.roles.index')->get();
+        $role_create = Permission::where('name', '=', 'admin.roles.create')->get();
+        $role_edit = Permission::where('name', '=', 'admin.roles.edit')->get();
+        $role_destroy = Permission::where('name', '=', 'admin.roles.destroy')->get();
+        if($request->indexRoles === 'on') {$role->givePermissionTo($role_index);} else{$role->revokePermissionTo($role_index);}
+        if($request->createRoles === 'on') {$role->givePermissionTo($role_create);} else{$role->revokePermissionTo($role_create);}
+        if($request->editRoles === 'on') {$role->givePermissionTo($role_edit);} else{$role->revokePermissionTo($role_edit);}
+        if($request->destroyRoles === 'on') {$role->givePermissionTo($role_destroy);} else{$role->revokePermissionTo($role_destroy);}
 
         $permissions_index = Permission::where('name', '=', 'admin.permissions.index')->get();
         $permissions_create = Permission::where('name', '=', 'admin.permissions.create')->get();
