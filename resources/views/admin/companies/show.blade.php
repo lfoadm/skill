@@ -30,7 +30,9 @@
                         <input type="hidden" name="id" value="{{ $company->id }}">
                     </div>
                     <a href="{{ route('admin.companies.index') }}" class="btn btn-warning"><i class="fas fa-times-circle"></i> Cancelar</a>
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button>
+                    {{-- @can('admin.companies.destroy')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button>
+                    @endcan --}}
                 </form>
             </div>
         </div>

@@ -271,25 +271,25 @@ return [
         [
             'text' => 'initials_settings',
             'icon'    => 'fas fa-fw fa-trash',
-            //'can'  => 'admin.roles.index',
+            'can'  => 'admin.roles.index',
             'submenu' => [
                 [
                     'text' => 'users',
                     'route'  => 'admin.users.index',
                     'icon' => 'fas fa-fw fa-users',
-                    //'can'  => 'admin.users.index',
+                    'can'  => 'admin.users.index',
                 ],
                 [
                     'text' => 'group_access',
                     'route'  => 'admin.roles.index',
                     'icon' => 'fas fa-fw fa-user-lock',
-                    //'can'  => 'admin.roles.index',
+                    'can'  => 'admin.roles.index',
                 ],
                 [
                     'text' => 'permissions',
                     'route'  => 'admin.permissions.index',
                     'icon' => 'fas fa-lock',
-                    //'can'  => 'admin.permissions.index',
+                    'can'  => 'admin.permissions.index',
                 ],
             ],
         ],
@@ -304,19 +304,19 @@ return [
             'text' => 'Tenants',
             'route'  => 'admin.tenants.index',
             'icon' => 'fas fa-fw fa-suitcase',
-            //'can'  => 'admin.tenants.index',
+            'can'  => 'admin.tenants.index',
         ],
         [
             'text' => 'Companies',
             'route'  => 'admin.companies.index',
             'icon' => 'fas fa-fw fa-crown',
-            //'can'  => 'admin.companies.index',
+            'can'  => 'admin.companies.index',
         ],
         [
             'text' => 'Drivers',
             'route'  => 'admin.drivers.index',
             'icon' => 'fas fa-fw fa-clipboard-list',
-            //'can'  => 'admin.drivers.index',
+            'can'  => 'admin.drivers.index',
         ],
         [
             'text' => 'Trucks',

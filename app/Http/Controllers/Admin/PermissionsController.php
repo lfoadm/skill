@@ -8,26 +8,29 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:superadmin']);
+    }
+
     public function index()
     {
         $permissions = Permission::paginate(9);
         return view('admin.spatie.permission.index', ['permissions' => $permissions]);
     }
 
-    
     public function create()
     {
         return view('admin.spatie.permission.create');
     }
 
-    
     public function store(Request $request)
     {
         $permission = new Permission();
         $permission->name = $request->name;
         $permission->save();
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permissão criada com sucesso!');
     }
 
 
@@ -51,7 +54,7 @@ class PermissionsController extends Controller
         $permission->name = $request->name;
         $permission->save();
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permissão atualizada com sucesso!');;
     }
 
     
@@ -60,6 +63,6 @@ class PermissionsController extends Controller
         $permission = Permission::find($id);
         $permission->delete();
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('admin.permissions.index')->with('danger', 'Permissão apagada com sucesso!');
     }
 }

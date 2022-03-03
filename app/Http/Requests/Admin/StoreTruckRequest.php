@@ -35,9 +35,9 @@ class StoreTruckRequest extends FormRequest
             'modelYear'         => 'nullable',
             'plate'             => 'required|max:8',
             'chassis'           => 'nullable',
-            'renavan'           => 'nullable',
+            'renavan'           => 'nullable|max:15',
             'UF'                => 'nullable',
-            'color'             => 'nullable',
+            'color'             => 'nullable|alpha',
         ];
     }
 }

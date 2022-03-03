@@ -11,6 +11,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:superadmin']);
+    }
+
+
     use HasRoles;
 
     public function index()
@@ -94,7 +100,7 @@ class UserController extends Controller
 
         $user->tenant_id = $request->tenant_id;
         $user->save();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     /**
@@ -118,7 +124,7 @@ class UserController extends Controller
             $user->status = 'inactived';
             $user->save();
             
-            return redirect()->route('admin.users.index');
+            return redirect()->route('admin.users.index')->with('warning', 'Usuário desabilitado do sistema!');
         /* }
         else
         {
@@ -135,7 +141,7 @@ class UserController extends Controller
             $user->status = 'actived';
             $user->save();
             
-            return redirect()->route('admin.users.index');
+            return redirect()->route('admin.users.index')->with('success', 'Usuário habilitado com sucesso!');
         /* }
         else
         {

@@ -49,10 +49,9 @@ class CompanyController extends Controller
         
         $company->save();
         
-        return redirect()->route('admin.companies.index')->with('message', 'Empresa cadastrada com sucesso!');
+        return redirect()->route('admin.companies.index')->with('success', 'Empresa cadastrada com sucesso!');
     }
 
-    
     public function show($id)
     {
         $company = Company::find($id);
@@ -60,18 +59,19 @@ class CompanyController extends Controller
         return view('admin.companies.show', ['company' => $company]);
     }
 
-    
     public function edit($id)
     {
         $tenants = Tenant::all();
         $company = Company::find($id);
+        $user = Auth::user();
+        
         return view('admin.companies.edit', [
             'company' => $company,
             'tenants' => $tenants,
+            'user' => $user,
         ]);
     }
 
-    
     public function update(Request $request, $id)
     {
         $company = Company::find($request->id);
@@ -99,22 +99,27 @@ class CompanyController extends Controller
 
         $company->save();
         
-        return redirect()->route('admin.companies.index')->with('message', 'Empresa atualizada com sucesso!');
+        return redirect()->route('admin.companies.index')->with('success', 'Empresa atualizada com sucesso!');
     }
-    
 
     //APAGAR EMPRESA
     public function destroy(Request $request)
     {
-        $company = Company::find($request->id);
-        
-        if($company->image && Storage::exists('companies', $company->image))
-            {
-                unlink('storage/companies' . '/' . $company->image);
-            }
-
-        Company::destroy($request->id);
-        return redirect()->route('admin.companies.index')->with('msg', 'Empresa apagada com sucesso!');
+        $user = Auth::user();
+        if($user->hasRole('superadmin'))
+        {
+            $company = Company::find($request->id);
+            if($company->image && Storage::exists('companies', $company->image))
+                {
+                    unlink('storage/companies' . '/' . $company->image);
+                }
+            Company::destroy($request->id);
+            return redirect()->route('admin.companies.index')->with('danger', 'Empresa apagada com sucesso!');
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
     }
 
     //desativar empresas
@@ -128,7 +133,7 @@ class CompanyController extends Controller
             $company->status = 0;
             $company->save();
         
-            return redirect()->route('admin.companies.index');
+            return redirect()->route('admin.companies.index')->with('warning', 'Empresa desabilida!');
         }
         else
         {
@@ -145,7 +150,7 @@ class CompanyController extends Controller
             $company = Company::find($id);
             $company->status = 1;
             $company->save();
-            return redirect()->route('admin.companies.index');
+            return redirect()->route('admin.companies.index')->with('success', 'Empresa habilida!');
         }
         else
         {

@@ -18,12 +18,34 @@ class TruckController extends Controller
     
     public function index()
     {
-        $trucks = Truck::all();
-
-        return view('admin.trucks.index', ['trucks' => $trucks]);
+        $user = Auth::user();
+        if($user->hasRole('superadmin'))
+        {
+            $trucks = Truck::get();
+            return view('admin.trucks.index', ['trucks' => $trucks]);
+        }
+        elseif($user->hasRole('secretaria'))
+        {
+            $trucks = Truck::get();
+            //$trucks = Truck::first();
+            //dd();
+            
+            return view('admin.trucks.index', ['trucks' => $trucks]);
+        }
+        else
+        {
+            if($user->truck)
+            {
+            $trucks = Truck::where('user_id', $user->truck->user_id)->get();
+            //dd($trucks);
+            return view('admin.trucks.index', ['trucks' => $trucks]);
+            }
+            
+            return redirect()->route('dashboard');
+        }
+        
     }
 
-    
     public function create()
     {
         $tenants = Tenant::all();
@@ -63,20 +85,13 @@ class TruckController extends Controller
         
         $truck->save();
         
-        return redirect()->route('admin.trucks.index')->with('message', 'Veículo cadastrado com sucesso!');
+        return redirect()->route('admin.trucks.index')->with('success', 'Veículo cadastrado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $truck = Truck::find($id);
         return view('admin.trucks.show', ['truck' => $truck]);
-
     }
 
     public function edit($id)
@@ -123,21 +138,19 @@ class TruckController extends Controller
         
         $truck->save();
         
-        return redirect()->route('admin.trucks.index');
+        return redirect()->route('admin.trucks.index')->with('success', 'Veículo atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
         $truck = Truck::find($id);
-        
         if($truck->image && Storage::exists('trucks', $truck->image))
             {
                 unlink('storage/trucks' . '/' . $truck->image);
             }
         Truck::destroy($id);
-        return redirect()->route('admin.trucks.index')->with('msg', 'Veículo apagado com sucesso!');
+        return redirect()->route('admin.trucks.index')->with('danger', 'Veículo apagado com sucesso!');
     }
-
 
     //desativar caminhão
     public function disable($id)
@@ -149,7 +162,7 @@ class TruckController extends Controller
             $truck->status = 0;
             $truck->save();
         
-            return redirect()->route('admin.trucks.index');
+            return redirect()->route('admin.trucks.index')->with('danger', 'Veículo desabilitado!');
         }
         else
         {
@@ -166,8 +179,8 @@ class TruckController extends Controller
             $truck = Truck::find($id);
             $truck->status = 1;
             $truck->save();
-            
-            return redirect()->route('admin.trucks.index');
+
+            return redirect()->route('admin.trucks.index')->with('success', 'Veículo habilitado!');
         }
         else
         {

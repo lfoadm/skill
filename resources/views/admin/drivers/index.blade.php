@@ -10,17 +10,7 @@
 
 <div class="row">
     <div class="col-12">
-        @if(session('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        @elseif(session('msg'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('msg') }}
-            </div>
-        @endif
-
-        
+        @include('includes.alerts.alert')
         <div class="card">
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
@@ -89,24 +79,11 @@
                                     @endif
                                 </td>
                                 <td  class="text-center" style="width: 8%">
-                                    {{-- <a href="{{ route('admin.drivers.edit', ['driver' => $driver->id]) }}"><i class="fas fa-pencil-alt" style="color: rgb(158, 157, 157); margin-right:10px"></i></a> --}}
-                                    {{-- <a href="{{ route('admin.drivers.show', ['driver' => $driver->id]) }}"><i class="fas fa-search-plus" style="color: #575ec4; margin-right:10px"></i></a> --}}
-                                        @if($driver->user->status === 'actived')
-                                            <a href="{{-- route('admin.drivers.disable', ['driver' => $driver->id]) --}}"><i class="fas fa-driver-slash" style="color:#e90a0a; margin-right:10px"></i></a>
-                                        @elseif($driver->status === 'inactived')
-                                            <a href="{{-- route('admin.drivers.enable', ['driver' => $driver->id]) --}}"><i class="fas fa-driver-check" style="color:#16be9a; margin-right:10px"></i></a>
-                                        @else
-                                            <a href="{{-- route('admin.drivers.enable', ['driver' => $driver->id]) --}}"><i class="fas fa-driver-check" style="color:#16be9a; margin-right:10px"></i></a>
+                                    @if($driver->user->tenant_id)
+                                        @if($driver->tenant_id === null)
+                                            <a href="{{ route('admin.drivers.setTenant', ['driver' => $driver->id]) }}"><i class="fas fa-shipping-fast" style="color:#16be9a; margin-right:10px"></i></a>
                                         @endif
-
-                                        @if($driver->user->tenant_id)
-                                            @if($driver->tenant_id === null)
-                                                <a href="{{ route('admin.drivers.setTenant', ['driver' => $driver->id]) }}"><i class="fas fa-shipping-fast" style="color:#16be9a; margin-right:10px"></i></a>
-                                            @else
-                                                
-                                            @endif
-                                        @else
-                                        @endif
+                                    @endif
                                 </td>
                             </tr>   
                         @endforeach

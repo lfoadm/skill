@@ -10,16 +10,10 @@
 
 <div class="row">
     <div class="col-12">
-        @if(session('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        @elseif(session('msg'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('msg') }}
-            </div>
-        @endif
-        <a href="{{ route('admin.trucks.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
+        @include('includes.alerts.alert')
+        @can('admin.trucks.create')
+            <a href="{{ route('admin.trucks.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
+        @endcan
         <div class="content">
             <div class="card">
                 <div class="card-body">
@@ -51,8 +45,8 @@
                                                             <img src="{{ url('storage/trucks/Default.jpg') }}" class="img-circle elevation-2 d-flex" style="max-width: 50px">
                                                         @endif
                                                     </td>
-                                                    <td style="width: 15%">{{ $truck->user->tenant->name }}</td>
-                                                    <td style="width: 15%">{{ $truck->user->name }}</td>
+                                                    <td style="width: 15%">@if($truck->tenant) {{ $truck->tenant->name }} @else <p>Veículo sem cadastro</p> @endif</td>
+                                                    <td style="width: 15%">@if($truck->user) {{ $truck->user->name }} @else <p>sem nome</p> @endif</td>
                                                     <td style="width: 10%">{{ $truck->plate }}</td>
                                                     <td class="text-center" style="width: 5%">
                                                         @if( $truck->status === 1)
@@ -62,16 +56,20 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center" style="width: 8%">
-                                                        <a href="{{ route('admin.trucks.edit', ['truck' => $truck->id]) }}"><i class="fas fa-pencil-alt" style="color: rgb(158, 157, 157); margin-right:10px"></i></a>
-                                                        <a href="{{ route('admin.trucks.show', ['truck' => $truck->id]) }}"><i class="fas fa-search-plus" style="color:#575ec4; margin-right:10px"></i></a>
-                                                        @if($truck->status)
-                                                            <a href="{{ route('admin.trucks.disable', ['truck' => $truck->id]) }}"><i class="fas fa-user-slash" style="color:rgb(77, 6, 6); margin-right:10px"></i></a>
-                                                        @else
-                                                            
-                                                                <a href="{{ route('admin.trucks.enable', ['truck' => $truck->id]) }}"><i class="fas fa-user-check" style="color:rgb(18, 92, 76); margin-right:10px"></i></a>
-                                                            
-                                                        @endif
-                                                        {{-- <a href="{{ route('usuarios.permissoes.show', ['truck' => $truck->id]) }}"><i class="fas fa-user-lock" style="color: black; margin-right:10px"></i></a> --}}
+                                                        @can('admin.trucks.index')
+                                                            <a href="{{ route('admin.trucks.edit', ['truck' => $truck->id]) }}"><i class="fas fa-pencil-alt" style="color: rgb(158, 157, 157); margin-right:10px"></i></a>
+                                                            <a href="{{ route('admin.trucks.show', ['truck' => $truck->id]) }}"><i class="fas fa-search-plus" style="color:#575ec4; margin-right:10px"></i></a>
+                                                            @can('admin.trucks.destroy')
+                                                                @if($truck->status)
+                                                                    <a href="{{ route('admin.trucks.disable', ['truck' => $truck->id]) }}"><i class="fas fa-user-slash" style="color:rgb(77, 6, 6); margin-right:10px"></i></a>
+                                                                @else
+                                                                    
+                                                                        <a href="{{ route('admin.trucks.enable', ['truck' => $truck->id]) }}"><i class="fas fa-user-check" style="color:rgb(18, 92, 76); margin-right:10px"></i></a>
+                                                                    
+                                                                @endif
+                                                                {{-- <a href="{{ route('usuarios.permissoes.show', ['truck' => $truck->id]) }}"><i class="fas fa-user-lock" style="color: black; margin-right:10px"></i></a> --}}
+                                                            @endcan    
+                                                        @endcan
                                                     </td>
                                                 </tr>   
                                             @endforeach

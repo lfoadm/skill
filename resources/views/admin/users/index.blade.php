@@ -9,9 +9,8 @@
 @section('content')
 
 <div class="row">
-    
     <div class="col-12">
-        <a href="{{-- route('admin.roles.create') --}}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
+        @include('includes.alerts.alert')
         <div class="card">
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
@@ -31,10 +30,10 @@
                             <tr data-widget="expandable-table" aria-expanded="false" role="row" class="odd">
                                 <td class="text-center" style="width: 1%">{{ $user->id }}</td>
                                 <td style="align-items: center; width: 1%">
-                                    @if($user->image)
-                                        <img src="{{-- url('storage/users') }}/{{ $user->image --}}" class="img-circle elevation-2 d-flex"  style="max-width: 50px">
+                                    @if($user->profile_photo_path)
+                                        <img src="{{ url('storage/') }}/{{ $user->profile_photo_path }}" class="img-circle elevation-2 d-flex"  style="max-width: 50px">
                                     @else
-                                        <img src="{{-- url('storage/users/default.jpg') }}{{-- url('storage/users/default.png') --}}" class="img-circle elevation-2 d-flex" style="max-width: 50px">
+                                        <img src="{{ url('storage/profile-photos/user.png') }}" class="img-circle elevation-2 d-flex" style="max-width: 50px">
                                     @endif
                                 </td>
                                 <td style="width: 15%">{{ $user->name }}</td>

@@ -9,19 +9,7 @@
 @section('content')
 
 <div class="content">
-    @if(session('message'))
-        <div class="alert alert-success" role="alert">
-            {{ session('message') }}
-        </div>
-    @elseif(session('info'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('info') }}
-        </div>
-    @elseif(session('updated'))
-        <div class="alert alert-primary" role="alert">
-            {{ session('updated') }}
-        </div>
-    @endif
+    @include('includes.alerts.alert')
     <a href="{{ route('admin.tenants.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
     <div class="card">
         <div class="card-body">

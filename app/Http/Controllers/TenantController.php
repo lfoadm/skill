@@ -10,6 +10,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class TenantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:superadmin']);
+    }
+
     public function index()
     {
         $tenants = Tenant::all();
@@ -28,7 +33,7 @@ class TenantController extends Controller
         $tenant->description = $request->description;
         $tenant->save();
         
-        return redirect()->route('admin.tenants.index')->with('message', 'Inquilino criado com sucesso!');
+        return redirect()->route('admin.tenants.index')->with('success', 'Inquilino criado com sucesso!');
     }
 
 
@@ -46,10 +51,8 @@ class TenantController extends Controller
         $tenant->description = $request->description;
         $tenant->save();
         
-        return redirect()->route('admin.tenants.index')->with('updated', 'Inquilino atualizado com sucesso!');
+        return redirect()->route('admin.tenants.index')->with('success', 'Inquilino atualizado com sucesso!');
     }
-
-
 
     public function show($id)
     {
@@ -57,13 +60,13 @@ class TenantController extends Controller
         return view('admin.tenants.show', ['tenant' => $tenant]);
     }
 
-    public function destroy($id)
+    /* public function destroy($id)
     {
         $tenant = Tenant::find($id);
         $tenant->delete();
 
-        return redirect()->route('admin.tenants.index')->with('info', 'Inquilino apagado!!!');
-    }
+        return redirect()->route('admin.tenants.index')->with('danger', 'Inquilino apagado!!!');
+    } */
 
     //desativar inquilinos
     public function disable($id)
@@ -75,7 +78,7 @@ class TenantController extends Controller
             $tenant->status = false;
             $tenant->save();
         
-            return redirect()->route('admin.tenants.index')->with('info', 'Inquilino desativado');
+            return redirect()->route('admin.tenants.index')->with('warning', 'Inquilino desativado');
         }
         else
         {
@@ -92,7 +95,7 @@ class TenantController extends Controller
             $tenant = Tenant::find($id);
             $tenant->status = true;
             $tenant->save();
-            return redirect()->route('admin.tenants.index')->with('message', 'Inquilino ativado!');;
+            return redirect()->route('admin.tenants.index')->with('success', 'Inquilino ativado!');;
         }
         else
         {

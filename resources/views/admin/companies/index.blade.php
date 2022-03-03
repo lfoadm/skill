@@ -10,16 +10,10 @@
 
 <div class="row">
     <div class="col-12">
-        @if(session('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        @elseif(session('msg'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('msg') }}
-            </div>
-        @endif
-        <a href="{{ route('admin.companies.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
+        @include('includes.alerts.alert')
+        @can('admin.companies.create')
+            <a href="{{ route('admin.companies.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
+        @endcan
         {{-- @if($companies->count() > 0) --}}
         <div class="card">
             <div class="card-body table-responsive p-0">
@@ -56,11 +50,13 @@
                                 <td  class="text-center" style="width: 8%">
                                     <a href="{{ route('admin.companies.edit', ['company' => $company->id]) }}"><i class="fas fa-pencil-alt" style="color: rgb(158, 157, 157); margin-right:10px"></i></a>
                                     <a href="{{ route('admin.companies.show', ['company' => $company->id]) }}"><i class="fas fa-search-plus" style="color: #575ec4; margin-right:10px"></i></a>
+                                    @can('admin.companies.destroy')
                                         @if($company->status === 1)
                                             <a href="{{ route('admin.companies.disable', ['company' => $company->id]) }}"><i class="fas fa-user-slash" style="color:#e90a0a; margin-right:10px"></i></a>
                                         @else
                                             <a href="{{ route('admin.companies.enable', ['company' => $company->id]) }}"><i class="fas fa-user-check" style="color:#16be9a; margin-right:10px"></i></a>
                                         @endif
+                                    @endcan
                                 </td>
                             </tr>   
                         @endforeach

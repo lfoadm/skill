@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Admin\Driver;
 use App\Models\Admin\Tenant;
+use App\Models\Admin\Truck;
 use App\Models\Traits\Tenantable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -124,5 +125,10 @@ class User extends Authenticatable
     public function driver()
     {
         return $this->hasMany(Driver::class);
+    }
+
+    public function truck()
+    {
+        return $this->hasOne(Truck::class);
     }
 }

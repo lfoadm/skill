@@ -38,7 +38,7 @@ class DriverController extends Controller
         $driver->moppNumber = $request->moppNumber;
         $driver->save();
 
-        return redirect()->route('admin.profile.index')->with('message', 'Dados atualizado com sucesso!');
+        return redirect()->route('admin.profile.index')->with('success', 'Dados atualizado com sucesso!');
     }
 
     public function edit($id)
@@ -60,7 +60,7 @@ class DriverController extends Controller
             $driver = Driver::find($id);
             $driver->tenant_id = $driver->user->tenant_id;
             $driver->save();
-            return redirect()->route('admin.drivers.index')->with('message', 'Transportador atribuído com sucesso!');
+            return redirect()->route('admin.drivers.index')->with('success', 'Transportador atribuído com sucesso!');
         }
         else
         {

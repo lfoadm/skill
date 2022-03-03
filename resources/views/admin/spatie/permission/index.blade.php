@@ -10,10 +10,9 @@
 
 <div class="row">
     <div class="col-12">
+        @include('includes.alerts.alert')
         <a href="{{ route('admin.permissions.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
-            
         <div class="card">
-        
             @if($permissions->all())
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">

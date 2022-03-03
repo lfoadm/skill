@@ -11,6 +11,7 @@
 <div class="row">
     
     <div class="col-12">
+        @include('includes.alerts.alert')
         <a href="{{ route('admin.roles.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
             
         <div class="card">
@@ -54,11 +55,5 @@
 @stop
 
 @section('js')
-    <script>
-        Swal.fire(
-        'Bem vindo!',
-        'Este site exibe cookies!',
-        'success'
-)
-    </script>
+    
 @stop

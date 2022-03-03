@@ -10,12 +10,16 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:superadmin']);
+    }
+
     public function index()
     {
         $roles = Role::all();
         return view('admin.spatie.role.index', ['roles' => $roles]);
     }
-
 
     public function create()
     {
@@ -28,7 +32,7 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->save();
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('admin.roles.index')->with('success', 'Função criada com sucesso!');
     }
 
     public function edit($id)
@@ -66,6 +70,11 @@ class RoleController extends Controller
         $truckedit = $role->permissions->where('name', '=', 'admin.trucks.edit')->first();
         $truckdestroy = $role->permissions->where('name', '=', 'admin.trucks.destroy')->first();
 
+        $driverindex = $role->permissions->where('name', '=', 'admin.drivers.index')->first();
+        $drivercreate = $role->permissions->where('name', '=', 'admin.drivers.create')->first();
+        $driveredit = $role->permissions->where('name', '=', 'admin.drivers.edit')->first();
+        $driverdestroy = $role->permissions->where('name', '=', 'admin.drivers.destroy')->first();
+
         return view('admin.spatie.role.edit', [
             'role' => $role,
             'permissions' => $permissions,
@@ -89,7 +98,7 @@ class RoleController extends Controller
             'tenantedit' => $tenantedit,
             'tenantcreate' => $tenantcreate,
             'tenantdestroy' => $tenantdestroy,
-
+            
             'companyindex' => $companyindex,
             'companyedit' => $companyedit,
             'companycreate' => $companycreate,
@@ -99,6 +108,11 @@ class RoleController extends Controller
             'truckedit' => $truckedit,
             'truckcreate' => $truckcreate,
             'truckdestroy' => $truckdestroy,
+
+            'driverindex' => $driverindex,
+            'driveredit' => $driveredit,
+            'drivercreate' => $drivercreate,
+            'driverdestroy' => $driverdestroy,
 
         ]);
     }
@@ -119,9 +133,8 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->delete();
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('admin.roles.index')->with('danger', 'Função apagada com sucesso!');
     }
-
 
     public function role_has_permission(Request $request, $id)
     {
@@ -181,6 +194,15 @@ class RoleController extends Controller
         if($request->editTrucks === 'on') {$role->givePermissionTo($trucks_edit);} else{$role->revokePermissionTo($trucks_edit);}
         if($request->destroyTrucks === 'on') {$role->givePermissionTo($trucks_destroy);} else{$role->revokePermissionTo($trucks_destroy);}
 
-        return redirect()->route('admin.roles.index');
+        $drivers_index = Permission::where('name', '=', 'admin.drivers.index')->get();
+        $drivers_create = Permission::where('name', '=', 'admin.drivers.create')->get();
+        $drivers_edit = Permission::where('name', '=', 'admin.drivers.edit')->get();
+        $drivers_destroy = Permission::where('name', '=', 'admin.drivers.destroy')->get();
+        if($request->indexDrivers === 'on') {$role->givePermissionTo($drivers_index);} else{$role->revokePermissionTo($drivers_index);}
+        if($request->createDrivers === 'on') {$role->givePermissionTo($drivers_create);} else{$role->revokePermissionTo($drivers_create);}
+        if($request->editDrivers === 'on') {$role->givePermissionTo($drivers_edit);} else{$role->revokePermissionTo($drivers_edit);}
+        if($request->destroyDrivers === 'on') {$role->givePermissionTo($drivers_destroy);} else{$role->revokePermissionTo($drivers_destroy);}
+
+        return redirect()->route('admin.roles.index')->with('success', 'Permissões atualizadas com sucesso!');
     }
 }

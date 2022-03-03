@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="basic-form">
-                    <form action="{{ route('admin.trucks.destroy', ['truck' => $truck->id]) }}" method="POST">
+                    @can('admin.trucks.destroy')<form action="{{ route('admin.trucks.destroy', ['truck' => $truck->id]) }}" method="POST">@endcan
                         @csrf @method('delete')
                         <div class="form-row">
                             <div class="form-group col-md-8">
@@ -34,7 +34,9 @@
                             </div>
                         </div>
                         <a href="{{ route('admin.trucks.index') }}" class="btn btn-warning"><i class="fas fa-times-circle"></i> Cancelar</a>
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button>
+                        @can('admin.trucks.destroy')
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button>
+                        @endcan
                     </form>
                 </div>
             </div>

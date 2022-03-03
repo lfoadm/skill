@@ -20,7 +20,6 @@
                 <input type="text" class="form-control" name="name" id="name" placeholder="Digite o nome">
             </div>
         </div>
-
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </div>
@@ -33,11 +32,5 @@
 @stop
 
 @section('js')
-    <script>
-        Swal.fire(
-        'Bem vindo!',
-        'Este site exibe cookies!',
-        'success'
-)
-    </script>
+    
 @stop

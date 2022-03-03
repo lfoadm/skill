@@ -52,6 +52,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.trucks.edit']);
         Permission::create(['name' => 'admin.trucks.destroy']);
 
+        Permission::create(['name' => 'admin.drivers.index']);
+        Permission::create(['name' => 'admin.drivers.create']);
+        Permission::create(['name' => 'admin.drivers.edit']);
+        Permission::create(['name' => 'admin.drivers.destroy']);
+
         Permission::create(['name' => 'admin.dashboard.index']);
         Permission::create(['name' => 'admin.dashboard.create']);
         Permission::create(['name' => 'admin.dashboard.edit']);

@@ -26,7 +26,7 @@
                         
                     </div>
                     <a href="{{ route('admin.tenants.index') }}" class="btn btn-warning"><i class="fas fa-times-circle"></i> Cancelar</a>
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button>
+                    {{-- <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</button> --}}
                 </form>
             </div>
         </div>
