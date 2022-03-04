@@ -72,7 +72,7 @@ class TruckController extends Controller
         $truck->chassis         = $request->chassis;
         $truck->renavan         = $request->renavan;
         $truck->uf              = $request->uf;
-        $truck->color           = $request->surname;
+        $truck->color           = $request->color;
         //$truck->status          = 1;
         
         if($request->hasFile('image') && $request->image->isValid())
@@ -121,7 +121,7 @@ class TruckController extends Controller
         $truck->chassis         = $request->chassis;
         $truck->renavan         = $request->renavan;
         $truck->uf              = $request->uf;
-        $truck->color           = $request->surname;
+        $truck->color           = $request->color;
         
         if($request->hasFile('image') && $request->image->isValid())
         {

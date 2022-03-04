@@ -6,31 +6,40 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCompanyRequest;
 use App\Models\Admin\Company;
 use App\Models\Admin\Tenant;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class CompanyController extends Controller
 {
     public function index()
     {
         $companies = Company::all();
-        //dd($companies);
+        //dd($companies->user->first());
         return view('admin.companies.index', ['companies' => $companies]);
     }
 
     public function create()
     {
         $tenants = Tenant::all();
-        return view('admin.companies.create', ['tenants' => $tenants]);
+        $users = User::where('type', 'manager')->get();
+
+        return view('admin.companies.create', [
+            'tenants' => $tenants,
+            'users' => $users,
+        ]);
     }
 
     public function store(StoreCompanyRequest $request)
     {
         $company = new Company();
         $company->tenant_id     = $request->tenant_id;
+        $company->user_id       = $request->user_id;
         $company->corporateName = $request->corporateName;
         $company->cnpj          = $request->cnpj;
         $company->fantasyName   = $request->fantasyName;
@@ -64,11 +73,14 @@ class CompanyController extends Controller
         $tenants = Tenant::all();
         $company = Company::find($id);
         $user = Auth::user();
+        $users = User::where('type', 'manager')->get();
         
+        //dd($company->user_id);
         return view('admin.companies.edit', [
             'company' => $company,
             'tenants' => $tenants,
             'user' => $user,
+            'users' => $users,
         ]);
     }
 
@@ -76,6 +88,7 @@ class CompanyController extends Controller
     {
         $company = Company::find($request->id);
         $company->tenant_id     = $request->tenant_id;
+        $company->user_id       = $request->user_id;
         $company->corporateName = $request->corporateName;
         $company->cnpj          = $request->cnpj;
         $company->fantasyName   = $request->fantasyName;

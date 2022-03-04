@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Company;
 use App\Models\Admin\Driver;
 use App\Models\Admin\Tenant;
 use App\Models\Admin\Truck;
@@ -130,5 +131,10 @@ class User extends Authenticatable
     public function truck()
     {
         return $this->hasOne(Truck::class);
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
     }
 }

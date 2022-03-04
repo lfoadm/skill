@@ -23,6 +23,7 @@
                             <th class="text-center">Código</th>
                             <th class="text-center">Logo</th>
                             <th class="text-center">Nome</th>
+                            <th class="text-center">Responsável</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Ações</th>
                         </tr>
@@ -39,7 +40,8 @@
                                     @endif
                                 </td>
                                 <td style="width: 15%" class="text-center">{{ $company->corporateName }}</td>
-                                
+                                <td style="width: 15%" class="text-center"> @if($company->user) {{ $company->user->name }} @else <span class="badge bg-warning">Sem Responsável</span> @endif</td>
+
                                 <td class="text-center" style="width: 5%">
                                     @if( $company->status === 1)
                                         <span class="badge bg-success">Ativo</span>
@@ -78,11 +80,5 @@
 @stop
 
 @section('js')
-    <script>
-        Swal.fire(
-        'Bem vindo!',
-        'Este site exibe cookies!',
-        'success'
-)
-    </script>
+
 @stop

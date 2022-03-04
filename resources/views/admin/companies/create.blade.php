@@ -16,12 +16,12 @@
                     <form action="{{ route('admin.companies.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <label for="corporateName">Nome</label>
                                 <input type="text" class="form-control" name="corporateName" required>
                                 @error('corporateName') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="tenant_id">Inquilino</label>
                                 <span class="badge bg-primary"><a href="{{ route('admin.tenants.create') }}"><i class="fas fa-plus"></i> Adicionar</a></span>
                                 <div>
@@ -33,6 +33,18 @@
                                     </select>
                                 </div>
                                 @error('tenant_id') <p class="text-danger">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="user_id">Diretor Responsável</label>
+                                <div>
+                                    <select class="form-control" name="user_id" id="user_id">
+                                        <option value=""><p>Selecione...</p></option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">@if($user->hasRole('gerente')) {{ $user->id }} - {{ $user->name }} @endif</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('user_id') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="fantasyName">Nome Fantasia</label>

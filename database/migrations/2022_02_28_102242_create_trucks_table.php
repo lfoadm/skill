@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('color', 30);
             $table->string('plate', 8);
             $table->string('chassis', 17);
-            $table->string('renavan', 12);
+            $table->string('renavan', 15);
             $table->string('UF', 2);
             $table->timestamps();
         });

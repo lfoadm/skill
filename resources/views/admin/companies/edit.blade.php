@@ -16,24 +16,36 @@
                     <form action="{{ route('admin.companies.update', ['company' => $company->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf @method('PUT')
                         <div class="form-row">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <label for="corporateName">Nome</label>
                                 <input type="text" class="form-control" name="corporateName" required value="{{$company->corporateName}}">
                                 @error('corporateName') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
                             @if($user->hasRole('superadmin'))
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="tenant_id">Inquilino</label>
                                     <span class="badge bg-primary"><a href="{{ route('admin.tenants.create') }}"><i class="fas fa-plus"></i> Adicionar</a></span>
                                         <div>
                                             <select class="form-control" name="tenant_id" id="tenant_id">
                                                 <option value=""><p>Selecione...</p></option>
                                                 @foreach($tenants as $tenant)
-                                                    <option value="{{ $tenant->id }}"@if($company->tenant) selected='selected' @endif>{{ strtoupper($tenant->id) }} - {{ strtoupper($tenant->name) }}</option>
+                                                    <option value="{{ $tenant->id }}" {{ $tenant->id == $company->tenant_id ? 'selected' : '' }} >{{ strtoupper($tenant->id) }} - {{ strtoupper($tenant->name) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         @error('tenant_id') <p class="text-danger">{{ $message }}</p> @enderror
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="user_id">Diretor Responsável</label>
+                                    <div>
+                                        <select class="form-control" name="user_id" id="user_id">
+                                            <option value=""><p>Selecione...</p></option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}" {{ $user->id == $company->user_id ? 'selected' : '' }} >@if($user->hasRole('gerente')) {{ $user->id }} - {{ $user->name }} @endif</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('user_id') <p class="text-danger">{{ $message }}</p> @enderror
                                 </div>
                             @elseif($user->hasRole('secretaria'))
                                 <input type="hidden" name="tenant_id" id="tenant_id" value="{{ $user->tenant->id }}">

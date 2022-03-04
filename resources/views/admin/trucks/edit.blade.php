@@ -101,7 +101,7 @@
                                     <select class="form-control" name="user_id" id="user_id">
                                         <option value=""><p>Selecione...</p></option>
                                         @foreach($drivers as $driver)
-                                            <option value="{{ $driver->id }}" @if($truck->user_id) selected='selected' @endif>{{ strtoupper($driver->id) }} - {{ strtoupper($driver->name) }}</option>
+                                            <option value="{{ $driver->id }}"  {{ $driver->id == $truck->user_id ? 'selected' : '' }}>{{ strtoupper($driver->id) }} - {{ strtoupper($driver->name) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
