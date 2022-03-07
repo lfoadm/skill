@@ -25,4 +25,5 @@ return [
     'Drivers'                       => 'Motoristas',
     'Companies'                     => 'Empresas',
     'Trucks'                        => 'Veículos',
+    'Operations'                    => 'Operações',
 ];

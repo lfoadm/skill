@@ -21,11 +21,11 @@
                             <table class="table table-bordered table-hover" role="grid">
                                 <thead>
                                     <tr role="row">
-                                        <th>Código</th>
-                                        <th>Avatar</th>
-                                        <th>Empresa</th>
-                                        <th>Motorista</th>
-                                        <th>Placa</th>
+                                        <th class="text-center">Código</th>
+                                        <th class="text-center">Avatar</th>
+                                        <th class="text-center">Apelido</th>
+                                        <th class="text-center">Modelo</th>
+                                        <th class="text-center">Placa</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
@@ -33,8 +33,8 @@
                                 <tbody>
                                     @foreach($trucks as $truck)
                                     <tr data-widget="expandable-table" aria-expanded="false" role="row" class="odd">
-                                        <td style="width: 1%">{{ $truck->id }}</td>
-                                        <td style="width: 1%">
+                                        <td class="text-center" style="width: 1%">{{ $truck->id }}</td>
+                                        <td class="text-center" style="width: 1%">
                                             @if($truck->image)
                                             <img src="{{ url('storage/trucks') }}/{{ $truck->image }}"
                                                 class="img-circle elevation-2 d-flex" style="max-width: 50px">
@@ -43,10 +43,10 @@
                                                 class="img-circle elevation-2 d-flex" style="max-width: 50px">
                                             @endif
                                         </td>
-                                        <td style="width: 15%">@if($truck->tenant) {{ $truck->tenant->name }} @else <p>Veículosem cadastro</p> @endif</td>
-                                        <td style="width: 15%">@if($truck->user) {{ $truck->user->name }} @else <p>sem nome</p>
+                                        <td class="text-center" style="width: 15%">@if($truck) {{ $truck->surname }} @endif</td>
+                                        <td class="text-center" style="width: 15%">@if($truck) {{ $truck->model }} @else <p>sem nome</p>
                                             @endif</td>
-                                        <td style="width: 10%">{{ $truck->plate }}</td>
+                                        <td class="text-center" style="width: 10%">{{ $truck->plate }}</td>
                                         <td class="text-center" style="width: 5%">
                                             @if( $truck->status === 1)
                                             <span class="badge bg-success">Ativo</span>

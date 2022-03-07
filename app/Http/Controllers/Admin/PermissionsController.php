@@ -16,7 +16,7 @@ class PermissionsController extends Controller
     public function index()
     {
         $permissions = Permission::paginate(9);
-        return view('admin.spatie.permission.index', ['permissions' => $permissions]);
+        return view('admin.spatie.permission.index', compact('permissions'));
     }
 
     public function create()
@@ -37,32 +37,27 @@ class PermissionsController extends Controller
     public function show($id)
     {
         $permission = Permission::find($id);
-        return view('admin.spatie.permission.show', ['permission' => $permission]);
+        return view('admin.spatie.permission.show', compact('permission'));
     }
     
     public function edit($id)
     {
         $permission = Permission::find($id);
-        //dd($id);
-        return view('admin.spatie.permission.edit', ['permission' => $permission]);
+        return view('admin.spatie.permission.edit', compact('permission'));
     }
 
-    
     public function update(Request $request, $id)
     {
         $permission = Permission::find($id);
         $permission->name = $request->name;
         $permission->save();
-
         return redirect()->route('admin.permissions.index')->with('success', 'Permissão atualizada com sucesso!');;
     }
 
-    
     public function destroy($id)
     {
         $permission = Permission::find($id);
         $permission->delete();
-
         return redirect()->route('admin.permissions.index')->with('danger', 'Permissão apagada com sucesso!');
     }
 }

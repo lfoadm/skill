@@ -390,6 +390,12 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ], */
+        ['header' => 'Operations'],
+        [
+            'text' => 'Recebimentos',
+            //'route'  => 'admin.profile.index',
+            'icon' => 'fas fa-comment-dollar',
+        ],
     ],
 
     /*

@@ -20,19 +20,14 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        //dd($companies->user->first());
-        return view('admin.companies.index', ['companies' => $companies]);
+        return view('admin.companies.index', compact('companies'));
     }
 
     public function create()
     {
         $tenants = Tenant::all();
         $users = User::where('type', 'manager')->get();
-
-        return view('admin.companies.create', [
-            'tenants' => $tenants,
-            'users' => $users,
-        ]);
+        return view('admin.companies.create', compact('tenants', 'users'));
     }
 
     public function store(StoreCompanyRequest $request)
@@ -47,7 +42,6 @@ class CompanyController extends Controller
         $company->email         = $request->email;
         $company->site          = $request->site;
         $company->instagram     = $request->instagram;
-        
         if($request->hasFile('image') && $request->image->isValid())
         {
             $image = $request->file('image');
@@ -55,17 +49,14 @@ class CompanyController extends Controller
             $company->image = $image->storeAs('companies', $imageName);
             $company->image = $imageName;
         }
-        
         $company->save();
-        
         return redirect()->route('admin.companies.index')->with('success', 'Empresa cadastrada com sucesso!');
     }
 
     public function show($id)
     {
         $company = Company::find($id);
-        
-        return view('admin.companies.show', ['company' => $company]);
+        return view('admin.companies.show', compact('company'));
     }
 
     public function edit($id)
@@ -74,44 +65,26 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $user = Auth::user();
         $users = User::where('type', 'manager')->get();
-        
-        //dd($company->user_id);
-        return view('admin.companies.edit', [
-            'company' => $company,
-            'tenants' => $tenants,
-            'user' => $user,
-            'users' => $users,
-        ]);
+        return view('admin.companies.edit', compact('company', 'tenants', 'user', 'users'));
     }
 
     public function update(Request $request, $id)
     {
-        $company = Company::find($request->id);
-        $company->tenant_id     = $request->tenant_id;
-        $company->user_id       = $request->user_id;
-        $company->corporateName = $request->corporateName;
-        $company->cnpj          = $request->cnpj;
-        $company->fantasyName   = $request->fantasyName;
-        $company->phone         = $request->phone;
-        $company->email         = $request->email;
-        $company->site          = $request->site;
-        $company->instagram     = $request->instagram;
-        
+        if(!$company = Company::find($id))
+            return redirect()->route('admin.companies.index');
+        $data = $request->only('tenant_id', 'user_id', 'corporateName', 'cnpj', 'fantasyName', 'phone', 'email', 'site', 'instagram',);
         if($request->hasFile('image') && $request->image->isValid())
         {
             if($company->image && Storage::exists('companies', $company->image))
             {
                 unlink('storage/companies' . '/' . $company->image);
             }
-
             $image = $request->file('image');
             $imageName = Carbon::now()->timestamp. '.' . $image->extension();
             $company->image = $image->storeAs('companies', $imageName);
             $company->image = $imageName;
         }
-
-        $company->save();
-        
+        $company->update($data);
         return redirect()->route('admin.companies.index')->with('success', 'Empresa atualizada com sucesso!');
     }
 
@@ -141,12 +114,11 @@ class CompanyController extends Controller
         $user = Auth::user();
         if($user->hasRole('superadmin'))
         {
-            
             $company = Company::find($id);
             $company->status = 0;
             $company->save();
         
-            return redirect()->route('admin.companies.index')->with('warning', 'Empresa desabilida!');
+            return redirect()->route('admin.companies.index')->with('warning', 'Empresa desativada!');
         }
         else
         {
@@ -163,7 +135,7 @@ class CompanyController extends Controller
             $company = Company::find($id);
             $company->status = 1;
             $company->save();
-            return redirect()->route('admin.companies.index')->with('success', 'Empresa habilida!');
+            return redirect()->route('admin.companies.index')->with('success', 'Empresa ativa!');
         }
         else
         {

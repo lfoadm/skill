@@ -10,6 +10,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 class TenantController extends Controller
 {
+    use HasRoles;
+
     public function __construct()
     {
         $this->middleware(['role:superadmin']);
@@ -46,11 +48,9 @@ class TenantController extends Controller
 
     public function update(StoreTenantRequest $request, $id)
     {
-        $tenant = Tenant::find($id);
-        $tenant->name = $request->name;
-        $tenant->description = $request->description;
-        $tenant->save();
-        
+        if(!$tenant = Tenant::find($id))
+            return redirect()->route('admin.tenants.index');
+        $tenant->update($request->all());
         return redirect()->route('admin.tenants.index')->with('success', 'Inquilino atualizado com sucesso!');
     }
 
@@ -59,6 +59,8 @@ class TenantController extends Controller
         $tenant = Tenant::find($id);
         return view('admin.tenants.show', ['tenant' => $tenant]);
     }
+
+    ######### nunca podemos excluir um inquilino###########
 
     /* public function destroy($id)
     {
@@ -76,8 +78,7 @@ class TenantController extends Controller
         {
             $tenant = Tenant::find($id);
             $tenant->status = false;
-            $tenant->save();
-        
+            $tenant->save();        
             return redirect()->route('admin.tenants.index')->with('warning', 'Inquilino desativado');
         }
         else

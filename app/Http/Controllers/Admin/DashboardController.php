@@ -17,13 +17,7 @@ class DashboardController extends Controller
         $tenantCount = Tenant::all()->count();
         $user = Auth::user();
         $driverPre = User::where('status', '=', 'pre_registred')->count();
-
-        return view('dashboard', [
-            'user' => $user,
-            'userCount' => $userCount,
-            'tenantCount' => $tenantCount,
-            'driverPre' => $driverPre,
-        ]);
+        return view('dashboard', compact('user', 'userCount', 'tenantCount', 'driverPre'));
     }
 
 }

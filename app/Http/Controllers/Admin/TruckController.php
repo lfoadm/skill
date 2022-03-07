@@ -27,20 +27,15 @@ class TruckController extends Controller
         elseif($user->hasRole('secretaria'))
         {
             $trucks = Truck::get();
-            //$trucks = Truck::first();
-            //dd();
-            
             return view('admin.trucks.index', ['trucks' => $trucks]);
         }
         else
         {
             if($user->truck)
             {
-            $trucks = Truck::where('user_id', $user->truck->user_id)->get();
-            //dd($trucks);
-            return view('admin.trucks.index', ['trucks' => $trucks]);
+                $trucks = Truck::where('user_id', $user->truck->user_id)->get();
+                return view('admin.trucks.index', ['trucks' => $trucks]);
             }
-            
             return redirect()->route('dashboard');
         }
         
@@ -179,7 +174,6 @@ class TruckController extends Controller
             $truck = Truck::find($id);
             $truck->status = 1;
             $truck->save();
-
             return redirect()->route('admin.trucks.index')->with('success', 'Veículo habilitado!');
         }
         else
