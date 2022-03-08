@@ -6,6 +6,7 @@ use App\Models\Admin\Company;
 use App\Models\Admin\Driver;
 use App\Models\Admin\Tenant;
 use App\Models\Admin\Truck;
+use App\Models\Master\Balance;
 use App\Models\Traits\Tenantable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -136,5 +137,10 @@ class User extends Authenticatable
     public function company()
     {
         return $this->hasOne(Company::class);
+    }
+
+    public function balance()
+    {
+        return $this->hasOne(Balance::class);
     }
 }

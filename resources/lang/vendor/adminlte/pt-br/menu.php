@@ -26,4 +26,6 @@ return [
     'Companies'                     => 'Empresas',
     'Trucks'                        => 'Veículos',
     'Operations'                    => 'Operações',
+    'Finances'                      => 'Financeiro',
+    'Balance'                       => 'Saldo',
 ];

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Dashboard\DriverDashboardController;
+use App\Http\Controllers\Master\BalanceController;
+use App\Http\Controllers\Master\LoadingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -11,7 +14,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-    //Registrar receita de fretes
-    //Route::resource('balance', RevenueController::class)->names('master.revenues');
+    //Saldos
+    Route::resource('balance', BalanceController::class)->names('master.balance');
+
+    //Carregamentos
+    Route::resource('loadings', LoadingController::class)->names('master.loadings');
 });
 

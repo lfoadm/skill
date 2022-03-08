@@ -392,9 +392,29 @@ return [
         ], */
         ['header' => 'Operations'],
         [
-            'text' => 'Recebimentos',
-            //'route'  => 'admin.profile.index',
-            'icon' => 'fas fa-comment-dollar',
+            'text' => 'Finances',
+            'icon'    => 'fas fa-fw fa-money-bill-alt',
+            //'can'  => 'admin.roles.index',
+            'submenu' => [
+                [
+                    'text' => 'Balance',
+                    'route'  => 'master.balance.index',
+                    'icon' => 'fas fa-fw fa-search-dollar',
+                    //'can'  => 'admin.users.index',
+                ],
+                /* [
+                    'text' => 'group_access',
+                    'route'  => 'admin.roles.index',
+                    'icon' => 'fas fa-fw fa-user-lock',
+                    //'can'  => 'admin.roles.index',
+                ],
+                [
+                    'text' => 'permissions',
+                    'route'  => 'admin.permissions.index',
+                    'icon' => 'fas fa-lock',
+                    //'can'  => 'admin.permissions.index',
+                ], */
+            ],
         ],
     ],
 

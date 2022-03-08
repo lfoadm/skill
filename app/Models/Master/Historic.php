@@ -6,17 +6,11 @@ use App\Models\Traits\Tenantable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Balance extends Model
+class Historic extends Model
 {
     use HasFactory;
     use Tenantable;
 
     protected $guarded = ['id'];
-
-    public function deposit(float $value)
-    {
-        $this->amount += $value;
-        $this->save();
-    }
 
 }

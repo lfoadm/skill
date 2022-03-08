@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tenant_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->double('amount', 10, 2);
+            $table->double('amount', 10, 2)->default(0);
             $table->timestamps();
+            
         });
     }
 

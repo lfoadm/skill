@@ -6,17 +6,15 @@ use App\Models\Traits\Tenantable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Balance extends Model
+class Discharges extends Model
 {
     use HasFactory;
     use Tenantable;
 
     protected $guarded = ['id'];
 
-    public function deposit(float $value)
+    public function loading()
     {
-        $this->amount += $value;
-        $this->save();
+        return $this->belongsTo(Loading::class);
     }
-
 }
