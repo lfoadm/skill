@@ -20,12 +20,12 @@ class TenantController extends Controller
     public function index()
     {
         $tenants = Tenant::all();
-        return view('admin.tenants.index', ['tenants' => $tenants]);
+        return view('admin.web.tenants.index', ['tenants' => $tenants]);
     }
 
     public function create()
     {
-        return view('admin.tenants.create');
+        return view('admin.web.tenants.create');
     }
 
     public function store(StoreTenantRequest $request)
@@ -42,7 +42,7 @@ class TenantController extends Controller
     public function edit($id)
     {
         $tenant = Tenant::find($id);
-        return view('admin.tenants.edit', ['tenant' => $tenant]);
+        return view('admin.web.tenants.edit', ['tenant' => $tenant]);
     }
 
 
@@ -57,7 +57,7 @@ class TenantController extends Controller
     public function show($id)
     {
         $tenant = Tenant::find($id);
-        return view('admin.tenants.show', ['tenant' => $tenant]);
+        return view('admin.web.tenants.show', ['tenant' => $tenant]);
     }
 
     ######### nunca podemos excluir um inquilino###########

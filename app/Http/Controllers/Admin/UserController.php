@@ -11,9 +11,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class UserController extends Controller
 {
-    public function __construct()
+    protected $model;
+
+    public function __construct(User $user)
     {
         $this->middleware(['role:superadmin']);
+        $this->model = $user;
     }
 
 
@@ -21,28 +24,19 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::where('type', '!=', 'admin')->get();
+        $users = $this->model::where('type', '!=', 'admin')->get();
         //dd($users->HasRole('motorista'));
 
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.web.users.index', ['users' => $users]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
@@ -51,17 +45,17 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
+        $user = $this->model::find($id);
 
         //dd($user);
         
-        return view('admin.users.show', ['user' => $user]);
+        return view('admin.web.users.show', ['user' => $user]);
     }
 
     
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = $this->model::find($id);
         $tenants = Tenant::all();
 
         $rolemotorista  = $user->hasRole('motorista');
@@ -70,7 +64,7 @@ class UserController extends Controller
         $roleadmin      = $user->hasRole('admin');
         $rolesuperadmin = $user->hasRole('superadmin');
 
-        return view('admin.users.edit', [
+        return view('admin.web.users.edit', [
             'user' => $user,
             'tenants' => $tenants,
             'rolemotorista' => $rolemotorista,
@@ -90,7 +84,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->model::find($id);
         
         if($request->rolemotorista === 'on') {$user->assignRole('motorista');} else{$user->removeRole('motorista');}
         if($request->rolesecretaria === 'on') {$user->assignRole('secretaria');} else{$user->removeRole('secretaria');}
@@ -120,7 +114,7 @@ class UserController extends Controller
     {
         /* if(Auth::user()->hasRole === null)
         { */
-            $user = User::find($id);
+            $user = $this->model::find($id);
             $user->status = 'inactived';
             $user->save();
             
@@ -137,7 +131,7 @@ class UserController extends Controller
     {
         /* if(Auth::user()->hasRole === null)
         { */
-            $user = User::find($id);
+            $user = $this->model::find($id);
             $user->status = 'actived';
             $user->save();
             

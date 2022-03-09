@@ -18,6 +18,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('balance', BalanceController::class)->names('master.balance');
 
     //Carregamentos
-    Route::resource('loadings', LoadingController::class)->names('master.loadings');
+    Route::resource('loadings', LoadingController::class)->names('admin.loadings');
 });
 

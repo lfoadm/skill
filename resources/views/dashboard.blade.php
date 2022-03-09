@@ -9,16 +9,16 @@
 @section('content')
 
 @if($user->hasRole('superadmin'))
-@include('includes.dashboards.superadmin')
+@include('admin.includes.dashboards.superadmin')
 
 @elseif($user->hasRole('motorista'))
-@include('includes.dashboards.motorista')
+@include('admin.includes.dashboards.motorista')
 
 @elseif($user->hasRole('secretaria'))
-@include('includes.dashboards.secretaria')
+@include('admin.includes.dashboards.secretaria')
 
 @else
-@include('includes.dashboards.newuser')
+@include('admin.includes.dashboards.newuser')
 
 @endif
 

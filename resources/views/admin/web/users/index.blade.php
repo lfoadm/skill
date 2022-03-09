@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-12">
-        @include('includes.alerts.alert')
+        @include('admin.includes.alerts.alert')
         <div class="card">
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">

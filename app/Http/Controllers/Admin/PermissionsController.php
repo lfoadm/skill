@@ -16,12 +16,12 @@ class PermissionsController extends Controller
     public function index()
     {
         $permissions = Permission::paginate(9);
-        return view('admin.spatie.permission.index', compact('permissions'));
+        return view('admin.web.spatie.permission.index', compact('permissions'));
     }
 
     public function create()
     {
-        return view('admin.spatie.permission.create');
+        return view('admin.web.spatie.permission.create');
     }
 
     public function store(Request $request)
@@ -37,13 +37,13 @@ class PermissionsController extends Controller
     public function show($id)
     {
         $permission = Permission::find($id);
-        return view('admin.spatie.permission.show', compact('permission'));
+        return view('admin.web.spatie.permission.show', compact('permission'));
     }
     
     public function edit($id)
     {
         $permission = Permission::find($id);
-        return view('admin.spatie.permission.edit', compact('permission'));
+        return view('admin.web.spatie.permission.edit', compact('permission'));
     }
 
     public function update(Request $request, $id)

@@ -3,7 +3,7 @@
 @section('title', 'Grupo de usuários')
 
 @section('content_header')
-    <h1>Grupo de Usuários</h1>
+    <h1>Grupo de Acessos dos usuários</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
 <div class="row">
     
     <div class="col-12">
-        @include('includes.alerts.alert')
+        @include('admin.includes.alerts.alert')
         <a href="{{ route('admin.roles.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
             
         <div class="card">

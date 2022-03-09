@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="basic-form">
-                    <form action="{{ route('master.loadings.store') }}" method="POST">
+                    <form action="{{ route('admin.loadings.store') }}" method="POST">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -32,8 +32,8 @@
                                     <select class="form-control" name="product" id="product">
                                         <option value=""><p>-- Selecione --</p></option>
                                         <option value="Minério">Minério</option>
-                                        <option value="calcário">Calcário</option>
-                                        <option value="açúcar">Açúcar</option>
+                                        <option value="Calcário">Calcário</option>
+                                        <option value="Açúcar">Açúcar</option>
                                         <option value="Fosfato">Fosfato</option>
                                         <option value="Milho">Milho</option>
                                         <option value="Soja">Soja</option>
@@ -52,11 +52,11 @@
                                 <input type="text" class="form-control" id="unitPrice" name="unitPrice" id="unitPrice" required>
                                 @error('unitPrice') <p class="text-danger">{{ $message }}</p> @enderror
                             </div>
-                            <div class="form-group col-md-3">
+                            {{-- <div class="form-group col-md-3">
                                 <label for="totalPrice">Preço Total</label>
                                 <input type="text" class="form-control" id="totalPrice" name="totalPrice" id="totalPrice" required>
                                 @error('totalPrice') <p class="text-danger">{{ $message }}</p> @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group col-md-3">
                                 <label for="amount">Valor Recebido</label>
                                 <input type="text" class="form-control" id="amount" name="amount" required>
@@ -72,7 +72,7 @@
                             @endif
                         </div>
 
-                        <a href="{{ route('master.loadings.index') }}" class="btn btn-warning"><i class="fas fa-times-circle"></i> Cancelar</a>
+                        <a href="{{ route('admin.loadings.index') }}" class="btn btn-warning"><i class="fas fa-times-circle"></i> Cancelar</a>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Adicionar</button>
                     </form>
                 </div>

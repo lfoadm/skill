@@ -15,7 +15,7 @@ class DriverController extends Controller
     {
         //$users = User::where('type', '=', 'driver')->get();
         $drivers = Driver::all();
-        return view('admin.drivers.index', [
+        return view('admin.web.drivers.index', [
             //'users' => $users,
             'drivers' => $drivers,
         ]);
@@ -45,7 +45,7 @@ class DriverController extends Controller
     {
         $driver = Driver::find($id);
         $tenants = Tenant::all();
-        return view('admin.drivers.edit', [
+        return view('admin.web.drivers.edit', [
             'driver' => $driver,
             'tenants' => $tenants,
         ]);
@@ -60,7 +60,7 @@ class DriverController extends Controller
             $driver = Driver::find($id);
             $driver->tenant_id = $driver->user->tenant_id;
             $driver->save();
-            return redirect()->route('admin.drivers.index')->with('success', 'Transportador atribuído com sucesso!');
+            return redirect()->route('admin.web.drivers.index')->with('success', 'Transportador atribuído com sucesso!');
         }
         else
         {

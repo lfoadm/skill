@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-12">
-        @include('includes.alerts.alert')
+        @include('admin.includes.alerts.alert')
         @can('admin.companies.create')
             <a href="{{ route('admin.companies.create') }}" style="margin-bottom: 20px" class="btn btn-info btn-lg"><i class="fas fa-plus"></i></a>
         @endcan
@@ -41,7 +41,6 @@
                                 </td>
                                 <td style="width: 15%" class="text-center">{{ $company->corporateName }}</td>
                                 <td style="width: 15%" class="text-center"> @if($company->user) {{ $company->user->name }} @else <span class="badge bg-warning">Sem Responsável</span> @endif</td>
-
                                 <td class="text-center" style="width: 5%">
                                     @if( $company->status === 1)
                                         <span class="badge bg-success">Ativo</span>

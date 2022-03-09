@@ -20,14 +20,14 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('admin.companies.index', compact('companies'));
+        return view('admin.web.companies.index', compact('companies'));
     }
 
     public function create()
     {
         $tenants = Tenant::all();
         $users = User::where('type', 'manager')->get();
-        return view('admin.companies.create', compact('tenants', 'users'));
+        return view('admin.web.companies.create', compact('tenants', 'users'));
     }
 
     public function store(StoreCompanyRequest $request)
@@ -56,7 +56,7 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::find($id);
-        return view('admin.companies.show', compact('company'));
+        return view('admin.web.companies.show', compact('company'));
     }
 
     public function edit($id)
@@ -65,7 +65,7 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $user = Auth::user();
         $users = User::where('type', 'manager')->get();
-        return view('admin.companies.edit', compact('company', 'tenants', 'user', 'users'));
+        return view('admin.web.companies.edit', compact('company', 'tenants', 'user', 'users'));
     }
 
     public function update(Request $request, $id)

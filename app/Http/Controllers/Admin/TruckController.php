@@ -22,19 +22,19 @@ class TruckController extends Controller
         if($user->hasRole('superadmin'))
         {
             $trucks = Truck::get();
-            return view('admin.trucks.index', ['trucks' => $trucks]);
+            return view('admin.web.trucks.index', ['trucks' => $trucks]);
         }
         elseif($user->hasRole('secretaria'))
         {
             $trucks = Truck::get();
-            return view('admin.trucks.index', ['trucks' => $trucks]);
+            return view('admin.web.trucks.index', ['trucks' => $trucks]);
         }
         else
         {
             if($user->truck)
             {
                 $trucks = Truck::where('user_id', $user->truck->user_id)->get();
-                return view('admin.trucks.index', ['trucks' => $trucks]);
+                return view('admin.web.trucks.index', ['trucks' => $trucks]);
             }
             return redirect()->route('dashboard');
         }
@@ -47,7 +47,7 @@ class TruckController extends Controller
         $drivers = User::where('type', '=', 'driver')->get();
         
         //dd($drivers);
-        return view('admin.trucks.create', [
+        return view('admin.web.trucks.create', [
             'tenants' => $tenants,
             'drivers' => $drivers
         ]);
@@ -86,7 +86,7 @@ class TruckController extends Controller
     public function show($id)
     {
         $truck = Truck::find($id);
-        return view('admin.trucks.show', ['truck' => $truck]);
+        return view('admin.web.trucks.show', ['truck' => $truck]);
     }
 
     public function edit($id)
@@ -96,7 +96,7 @@ class TruckController extends Controller
         $drivers = User::where('type', '=', 'driver')->get();
         
         //dd($truck->user_id);
-        return view('admin.trucks.edit', [
+        return view('admin.web.trucks.edit', [
             'truck' => $truck,
             'tenants' => $tenants,
             'drivers' => $drivers,

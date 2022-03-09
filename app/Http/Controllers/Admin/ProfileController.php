@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $driver = $user->driver->first();
-        return view('admin.profile.index', compact('user', 'driver'));
+        return view('admin.web.profile.index', compact('user', 'driver'));
     }
 
     public function update(Request $request, $id)

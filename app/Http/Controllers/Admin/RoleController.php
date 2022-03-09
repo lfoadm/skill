@@ -18,12 +18,12 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('admin.spatie.role.index', ['roles' => $roles]);
+        return view('admin.web.spatie.role.index', ['roles' => $roles]);
     }
 
     public function create()
     {
-        return view('admin.spatie.role.create');
+        return view('admin.web.spatie.role.create');
     }
 
     public function store(Request $request)
@@ -75,7 +75,7 @@ class RoleController extends Controller
         $driveredit = $role->permissions->where('name', '=', 'admin.drivers.edit')->first();
         $driverdestroy = $role->permissions->where('name', '=', 'admin.drivers.destroy')->first();
 
-        return view('admin.spatie.role.edit', [
+        return view('admin.web.spatie.role.edit', [
             'role' => $role,
             'permissions' => $permissions,
 
@@ -125,7 +125,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        return view('admin.spatie.role.show', ['role' => $role]);
+        return view('admin.web.spatie.role.show', ['role' => $role]);
     }
 
     public function destroy($id)

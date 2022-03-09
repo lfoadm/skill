@@ -9,7 +9,7 @@
 @section('content')
 
 <section class="content">
-    @include('includes.alerts.alert')
+    @include('admin.includes.alerts.alert')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">

@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-12">
-                        <a href="{{ route('master.loadings.index') }}">
+                        <a href="{{ route('admin.loadings.index') }}">
                             <div class="info-box bg-gradient-primary">
                                 <span class="info-box-icon"><i class="fas fa-file-invoice-dollar"></i></span>
                                 <div class="info-box-content">

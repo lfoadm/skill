@@ -29,13 +29,13 @@
                         @csrf
                         <div class="row">
 
-                            @include('admin.spatie.includes.permissions.usergroup')
-                            @include('admin.spatie.includes.permissions.permissions')
-                            @include('admin.spatie.includes.permissions.users')
-                            @include('admin.spatie.includes.permissions.tenants')
-                            @include('admin.spatie.includes.permissions.companies')
-                            @include('admin.spatie.includes.permissions.trucks')
-                            @include('admin.spatie.includes.permissions.drivers')
+                            @include('admin.web.spatie.includes.permissions.usergroup')
+                            @include('admin.web.spatie.includes.permissions.permissions')
+                            @include('admin.web.spatie.includes.permissions.users')
+                            @include('admin.web.spatie.includes.permissions.tenants')
+                            @include('admin.web.spatie.includes.permissions.companies')
+                            @include('admin.web.spatie.includes.permissions.trucks')
+                            @include('admin.web.spatie.includes.permissions.drivers')
                             
                         </div>
                         <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">Cancelar</a>
